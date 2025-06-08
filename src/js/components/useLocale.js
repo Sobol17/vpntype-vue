@@ -5,7 +5,7 @@ export function useLocale(Vue, i18n) {
 
 	i18n.global.locale.value = savedLocale.value
 
-	function changeLocale(newLocale) {
+	const changeLocale = newLocale => {
 		savedLocale.value = newLocale
 		i18n.global.locale.value = newLocale
 		localStorage.setItem('locale', newLocale)

@@ -1,0 +1,45 @@
+.button {
+	width: 100%;
+	text-align: center;
+	outline: none;
+	border-radius: 12px;
+	background-color: $yellow;
+	color: $accent-black;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+	padding: 16px 32px;
+	font-size: 20px;
+	font-weight: 600;
+
+	&:hover {
+		background-color: $black;
+		color: $white;
+	}
+
+	&--secondary {
+		background-color: $black;
+		color: $white;
+
+		&:hover {
+			background-color: $yellow;
+			color: $accent-black;
+		}
+	}
+
+	&:disabled {
+		background-color: $grey;
+		color: $white;
+		cursor: not-allowed;
+	}
+
+	&--text {
+		padding: 0;
+		margin: 0;
+		background-color: transparent;
+		cursor: pointer;
+		display: flex;
+		column-gap: 4px;
+		align-items: center;
+		color: $primary;
+	}
+}

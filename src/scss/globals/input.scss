@@ -1,0 +1,39 @@
+.input {
+	border-radius: 8px;
+	height: 44px;
+	padding: 18px 14px;
+	border: 1px solid $grey-middle;
+	font-size: 16px;
+	width: 100%;
+
+	@include big-mobile {
+		min-width: auto;
+		width: 100%;
+	}
+
+	&:hover,
+	&:focus {
+		border-color: $primary;
+	}
+
+	&:not(&:placeholder-shown) {
+		border-color: $grey-middle;
+	}
+
+	&:focus {
+		&:not(&:placeholder-shown) {
+			border-color: $primary;
+		}
+	}
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	/* display: none; <- Crashes Chrome on hover */
+	-webkit-appearance: none;
+	margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type='number'] {
+	-moz-appearance: textfield; /* Firefox */
+}

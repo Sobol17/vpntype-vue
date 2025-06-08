@@ -1,0 +1,392 @@
+<div class="payments">
+	<h2 class="mobile-title subtitle-24">Выплаты</h2>
+
+	<div class="payments-wrapper" :class="{'payments-wrapper--center': successForm}">
+		<form v-if="!successForm" class="payments-form">
+			<h5 class="payments__title">Вывод вознаграждения</h5>
+
+			<div class="payments-step">
+				<div class="payments-step__title">
+					<img src="./assets/icons/icon_step_1.svg" alt="" />
+					<p>Куда вывести?</p>
+				</div>
+
+				<div class="payments-step__flex">
+					<custom-select
+						:options="paymentMethodOptions"
+						@update:selected="getSelectedMethod($event)"
+					></custom-select>
+					<button class="button--text payments-step__btn">
+						<img src="./assets/icons/icon_bank_card.svg" alt="" />
+						<span>Добавить новый метод</span>
+					</button>
+				</div>
+			</div>
+
+			<div v-if="selectedMethod?.value === 'sbp'" class="payments-step">
+				<div class="payments-step__title">
+					<img src="./assets/icons/icon_step_2.svg" alt="" />
+					<p>Введите имя и фамилию получателя</p>
+				</div>
+
+				<div class="payments-step__flex">
+					<input
+						v-model="recipientName"
+						class="input payments-step__input"
+						type="text"
+						placeholder="Введите данные"
+					/>
+					<p class="payments__hint"><span>Например:</span> Петр Иванов</p>
+				</div>
+			</div>
+
+			<div v-else class="payments-step">
+				<div class="payments-step__title">
+					<img src="./assets/icons/icon_step_2.svg" alt="" />
+					<p>Введите данные кошелька / карты</p>
+				</div>
+
+				<div class="payments-step__flex">
+					<input
+						v-model="cryptoWallet"
+						class="input payments-step__input"
+						type="text"
+						placeholder="Введите данные"
+					/>
+					<p class="payments__hint">
+						<span>Внимание:</span>тщательно проверьте правильность данных
+					</p>
+				</div>
+			</div>
+
+			<div v-if="selectedMethod?.value === 'sbp'" class="payments-step">
+				<div class="payments-step__title">
+					<img src="./assets/icons/icon_step_3.svg" alt="" />
+					<p>Выберите банк получателя</p>
+				</div>
+
+				<div class="payments-step__flex">
+					<custom-select
+						:options="paymentBanks"
+						@update:selected="getSelectedBank($event)"
+					></custom-select>
+					<p class="payments__hint">
+						<span>Например:</span> Сбер, Т-Банк, ВТБ, Россельхоз, Альфа Банк
+					</p>
+				</div>
+			</div>
+
+			<div class="payments-step">
+				<div class="payments-step__title">
+					<img v-if="selectedMethod?.value === 'sbp'" src="./assets/icons/icon_step_4.svg" alt="" />
+					<img v-else src="./assets/icons/icon_step_3.svg" alt="" />
+					<p>Введите сумму вывода</p>
+				</div>
+
+				<div class="payments-step__flex">
+					<input
+						v-model="sum"
+						class="input payments-step__input"
+						type="number"
+						placeholder="Введите сумму"
+					/>
+					<p class="payments__hint"><span>Внимание:</span>минимальная сумма вывода - 2000 руб.</p>
+				</div>
+			</div>
+
+			<button type="button" class="button" :disabled="!isFormValid">
+				Запросить вывод денежных средств
+			</button>
+
+			<h5 class="payments__title payments__title--mobile">Информация о выводе</h5>
+
+			<div class="payments-total_info payments-total_info--mobile">
+				<div class="payments-total_info__line">
+					<span>Куда вывести: </span>{{selectedMethod?.label}}
+				</div>
+				<div v-if="selectedMethod?.value === 'sbp'" class="payments-total_info__line">
+					<span>Имя и фамилия получателя: </span>{{recipientName}}
+				</div>
+				<div v-else class="payments-total_info__line">
+					<span>Данные кошелька / карты </span>{{cryptoWallet}}
+				</div>
+				<div class="payments-total_info__line"><span>Сумма вывода: </span>{{sum}}</div>
+				<p class="payments-total_info__hint">
+					*Вознаграждение поступит на указанный вами счет в течение 2 рабочих дней
+				</p>
+			</div>
+		</form>
+		<div v-else-if="partialPayment" class="payments-success">
+			<img class="payments-success__img" src="./assets/icons/payments-success.svg" alt="" />
+			<h4 class="payments-success__title">Запрос успешно отправлен</h4>
+			<p class="payments-success__text">
+				Скоро денежные средства поступят на указанный вами счет. Если вы не получили средства в
+				течении 2 рабочих дней, пожалуйста, обратитесь в нашу <a href="./">тех. поддержку</a>
+			</p>
+
+			<h5 class="payments__title payments__title--mobile">Информация о выводе</h5>
+
+			<div class="payments-total_info payments-total_info--mobile">
+				<div class="payments-total_info__line">
+					<span>Куда вывести: </span>{{selectedMethod?.label}}
+				</div>
+				<div v-if="selectedMethod?.value === 'sbp'" class="payments-total_info__line">
+					<span>Имя и фамилия получателя: </span>{{recipientName}}
+				</div>
+				<div v-else class="payments-total_info__line">
+					<span>Данные кошелька / карты </span>{{cryptoWallet}}
+				</div>
+				<div class="payments-total_info__line"><span>Сумма вывода: </span>{{sum}}</div>
+				<p class="payments-total_info__hint">
+					*Вознаграждение поступит на указанный вами счет в течение 2 рабочих дней
+				</p>
+			</div>
+		</div>
+		<div v-else class="payments-success payments-success--partial">
+			<img class="payments-success__img mt-auto" src="./assets/icons/payments-success.svg" alt="" />
+			<h4 class="payments-success__title">Запрос успешно отправлен</h4>
+			<p class="payments-success__text">
+				Скоро денежные средства в размере 3000 руб. поступят на указанный вами счет. Ваш текущий
+				баланс - 2000 руб.
+			</p>
+			<button class="button payments-success__btn">Вывести еще</button>
+			<p class="payments-success__text payments-success__text--bottom">
+				Если вы не получили средства в течении 2 рабочих дней, пожалуйста, обратитесь в нашу
+				<a href="./">тех. поддержку</a>
+			</p>
+
+			<h5 class="payments__title payments__title--mobile">Информация о выводе</h5>
+
+			<div class="payments-total_info payments-total_info--mobile">
+				<div class="payments-total_info__line">
+					<span>Куда вывести: </span>{{selectedMethod?.label}}
+				</div>
+				<div v-if="selectedMethod?.value === 'sbp'" class="payments-total_info__line">
+					<span>Имя и фамилия получателя: </span>{{recipientName}}
+				</div>
+				<div v-else class="payments-total_info__line">
+					<span>Данные кошелька / карты </span>{{cryptoWallet}}
+				</div>
+				<div class="payments-total_info__line"><span>Сумма вывода: </span>{{sum}}</div>
+				<p class="payments-total_info__hint">
+					*Вознаграждение поступит на указанный вами счет в течение 2 рабочих дней
+				</p>
+			</div>
+		</div>
+		<div class="payments-info">
+			<h5 class="payments__title">Текущий баланс</h5>
+			<div class="payments-info__flex">
+				<div class="payments-balance">
+					<i class="payments-balance__icon" :class="{'green': activePaymentIcon}">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="24"
+							height="25"
+							viewBox="0 0 24 25"
+							fill="none"
+						>
+							<g clip-path="url(#clip0_4477_29727)">
+								<path
+									d="M13.6324 16.4426C13.5428 16.3445 13.4294 16.271 13.3122 16.2099C13.0571 16.0768 12.778 15.9961 12.501 15.9233V18.0702C12.9507 18.0193 13.467 17.8561 13.7031 17.4363C13.8158 17.2358 13.8382 16.9894 13.7923 16.7661C13.7674 16.6452 13.7159 16.5341 13.6324 16.4426Z"
+									fill="currentColor"
+								/>
+								<path
+									d="M13.7012 17.4404C13.7021 17.4389 13.7026 17.4379 13.7035 17.4363C13.7028 17.4377 13.702 17.439 13.7012 17.4404Z"
+									fill="currentColor"
+								/>
+								<path
+									d="M10.3921 13.0106C10.3148 13.1235 10.2663 13.2518 10.2529 13.3881C10.2395 13.5247 10.247 13.6767 10.2989 13.8053C10.3483 13.9278 10.4518 14.0183 10.5587 14.0911C10.6786 14.1727 10.8104 14.2364 10.9447 14.2904C11.0574 14.3357 11.1841 14.3791 11.3207 14.421V12.4783C10.9756 12.5519 10.5986 12.7092 10.3921 13.0106Z"
+									fill="currentColor"
+								/>
+								<path
+									d="M13.712 17.4204C13.7092 17.4255 13.7061 17.4307 13.7031 17.4363C13.7066 17.4298 13.7094 17.4251 13.712 17.4204Z"
+									fill="currentColor"
+								/>
+								<path
+									d="M13.7236 17.4014C13.7251 17.3987 13.7253 17.3985 13.7236 17.4014V17.4014Z"
+									fill="currentColor"
+								/>
+								<path
+									d="M15.5526 0.581989C16.3033 0.733111 15.0834 4.18831 13.2577 5.72201C20.1396 8.55528 30.19 25.8777 10.1188 24.4122C-4.38702 23.3532 3.92788 8.75745 9.84356 5.84998C7.86073 4.56499 6.59336 1.61539 7.33152 0.804324C8.23938 -0.193219 9.85678 1.59642 11.3418 1.41712C12.3888 1.26193 14.555 0.381114 15.5526 0.581989Z"
+									fill="currentColor"
+								/>
+								<path
+									d="M13.6944 17.4515C13.6909 17.4577 13.6879 17.4631 13.6855 17.4672C13.6876 17.4636 13.6906 17.4583 13.6944 17.4515Z"
+									fill="currentColor"
+								/>
+								<path
+									d="M9 15.4214H10.1788V11.5H11.8477C12.872 11.5 13.6534 11.6971 14.1921 12.0914C14.7307 12.4857 15 13.0943 15 13.9171C15 14.74 14.7263 15.3657 14.1788 15.7943C13.6402 16.2143 12.8631 16.4243 11.8477 16.4243H11.3179V17.4786H14.1126V18.4686H11.3179V20.5H10.1788V18.4686H9V17.4786H10.1788V16.4243H9V15.4214ZM11.3179 12.5157V15.4214H11.7815C12.4437 15.4214 12.947 15.3057 13.2914 15.0743C13.6358 14.8429 13.8079 14.4571 13.8079 13.9171C13.8079 13.4543 13.649 13.1071 13.3311 12.8757C13.0132 12.6357 12.4834 12.5157 11.7417 12.5157H11.3179Z"
+									fill="white"
+								/>
+							</g>
+							<defs>
+								<clipPath id="clip0_4477_29727">
+									<rect width="24" height="24" fill="white" transform="translate(0 0.5)" />
+								</clipPath>
+							</defs>
+						</svg>
+					</i>
+					<p class="payments-balance__text">
+						<span ref="payment-balance" class="payments-balance__num">1200</span>руб.
+					</p>
+				</div>
+				<p class="payments__hint">
+					Это ваше вознаграждение, накопленное за период c 24.01.24г по 28.03.24г.
+				</p>
+			</div>
+
+			<p class="payments__text payments__text--border">
+				Присоединяйтесь к нашей партнерской программе и начните зарабатывать с каждым новым
+				пользователем, которого вы привлекли. Это простой и выгодный способ получить прибыль онлайн.
+			</p>
+			<h5 class="payments__title payments__title--desktop">Информация о выводе</h5>
+
+			<div class="payments-total_info payments-total_info--desktop">
+				<div class="payments-total_info__line">
+					<span>Куда вывести: </span>{{selectedMethod?.label}}
+				</div>
+				<div v-if="selectedMethod?.value === 'sbp'" class="payments-total_info__line">
+					<span>Имя и фамилия получателя: </span>{{recipientName}}
+				</div>
+				<div v-else class="payments-total_info__line">
+					<span>Данные кошелька / карты </span>{{cryptoWallet}}
+				</div>
+				<div class="payments-total_info__line"><span>Сумма вывода: </span>{{sum}}</div>
+				<p class="payments-total_info__hint">
+					*Вознаграждение поступит на указанный вами счет в течение 2 рабочих дней
+				</p>
+			</div>
+
+			<img class="payments-wrapper__icon" src="./assets/icons/icon_payments.svg" alt="" />
+		</div>
+	</div>
+
+	<h2 class="payments__head-title subtitle-24">Полный отчет</h2>
+
+	<table class="statistics__table">
+		<tr>
+			<th>Дата</th>
+			<th>Аккаунт</th>
+			<th>Всего</th>
+			<th>После комисии</th>
+			<th>Метод вывода</th>
+			<th>Статус</th>
+			<th>Комментарий</th>
+		</tr>
+		<tr>
+			<td>2 мая 2025 г.</td>
+			<td>akulovssv@gmail.com</td>
+			<td>51 665,62 ₽</td>
+			<td>49 599 ₽</td>
+			<td>
+				<span class='statistics__table__flex'>
+					<img src="./assets/icons/crypto.svg" alt="">
+					<div>
+						<p class='statistics__table__hint'>Крипто-кошелек</p>
+						<p>vsdohds****kews</p>
+					</div>
+				</span>
+			</th>
+			<td>
+				<span class='statistics__table__flex'>
+					<img src="./assets/icons/payment-statuses/pending.svg" alt="">
+					<p>
+						В процессе
+					</p>
+				</span>
+			</th>
+			<td>Order #14835118 </th>
+		</tr>
+		<tr>
+			<td>21 апреля 2025 г.</td>
+			<td>akulovssv@gmail.com</td>
+			<td>1 665,62 ₽</td>
+			<td>1 365,62 ₽</td>
+			<td>
+				<span class='statistics__table__flex'>
+					<img src="./assets/icons/card.svg" alt="">
+					<div>
+						<p class='statistics__table__hint'>Банковская карта</p>
+						<p>2345****5678</p>
+					</div>
+				</span>
+			</th>
+			<td>
+				<span class='statistics__table__flex'>
+					<img src="./assets/icons/payment-statuses/completed.svg" alt="">
+					<p>
+						Успешно завершен
+					</p>
+				</span>
+			</th>
+			<td>Comment</th>
+		</tr>
+		<tr>
+			<td>21 марта 2025 г</td>
+			<td>akulovssv@gmail.com</td>
+			<td>262 ₽</td>
+			<td>65,62 ₽</td>
+			<td>
+				<span class='statistics__table__flex'>
+					<img src="./assets/icons/umoney.svg" alt="">
+					<div>
+						<p class='statistics__table__hint'>Юmoney</p>
+						<p>2345****5678</p>
+					</div>
+				</span>
+			</th>
+			<td>
+				<span class='statistics__table__flex'>
+					<img src="./assets/icons/payment-statuses/error.svg" alt="">
+					<p>
+						Ошибка
+					</p>
+				</span>
+			</th>	
+			<td>Order #14835118 refund fee</th>
+		</tr>
+	</table>
+
+	<div class="statistics__mobile-cards">
+		<div v-for='i in 5' class="statistics__card">
+			<div class="statistics__card__title">1 Февраля 2024 г.</div>
+			<div class="statistics__card__content">
+				<div class="statistics__card__line">
+					<div class="statistics__card__text">Аккаунт:</div>
+					<div class="statistics__card__value">akulovssv@gmail.com</div>
+				</div>
+				<div class="statistics__card__line">
+					<div class="statistics__card__text">Всего:</div>
+					<div class="statistics__card__value">51 665,62 ₽</div>
+				</div>
+				<div class="statistics__card__line">
+					<div class="statistics__card__text">После комиссии:</div>
+					<div class="statistics__card__value">49 599 ₽</div>
+				</div>
+				<div class="statistics__card__line">
+					<div class="statistics__card__text">Метод вывода:</div>
+					<div class="statistics__card__value">
+						<span class='statistics__card__text--grey'>Крипто-кошелек</span> • vsfld****
+					</div>
+				</div>
+				<div class="statistics__card__line">
+					<div class="statistics__card__text">Статус:</div>
+					<div class="statistics__card__value">
+						<span class='statistics__table__flex'>
+							<img src="./assets/icons/payment-statuses/pending.svg" alt="">
+							<p>
+								В процессе
+							</p>
+						</span>
+					</div>
+				</div>
+				<div class="statistics__card__line">
+					<div class="statistics__card__text">Комментарий:</div>
+					<div class="statistics__card__value">
+						Order #14835118 
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

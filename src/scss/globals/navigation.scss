@@ -1,0 +1,49 @@
+.slider-navigation {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 55px;
+}
+
+.slider-navigation-prev,
+.slider-navigation-next {
+	border: none;
+	outline: none;
+	width: 60px;
+	height: 16px;
+	padding: 0;
+	background: url('/assets/icons/arrow.svg') no-repeat;
+	background-size: cover;
+	cursor: pointer;
+	transition: opacity 0.3s ease;
+
+	&:hover {
+		opacity: 0.5;
+	}
+}
+
+.slider-navigation-next {
+	transform: rotate(180deg);
+}
+
+.slider-navigation-text {
+	margin-left: auto;
+	margin-right: 24px;
+}
+
+@media (max-width: map-get($tablet, lg) - 1) {
+	.slider-navigation {
+		margin-top: 40px;
+	}
+}
+
+@media (max-width: map-get($tablet, sm) - 1) {
+	.slider-navigation {
+		margin-top: 30px;
+	}
+
+	.slider-navigation-text {
+		margin: 0 auto;
+		font-size: 15px;
+	}
+}

@@ -1,0 +1,38 @@
+<div v-if="isPopupShow" class="popup" id="popup-auth">
+	<div class="popup__container">
+		<button @click="togglePopup" class="popup__close" type="button" aria-label="Закрыть окно">
+			<img src="./assets/icons/icon_close.svg" alt="" />
+		</button>
+		<img class="popup__img" src="./assets/images/support.svg" alt="" />
+		<h2 class="popup__title">Форма обратной связи</h2>
+		<p class="popup__text">
+			Пожалуйста, заполните форму ниже, чтобы отправить нам свои вопросы, комментарии или
+			предложения.
+		</p>
+		<form class="popup__form" id="formAuth">
+			<label for="login" class="popup__form-label">Тема обращения</label>
+			<input
+				class="input popup__form-input"
+				type="text"
+				name="login"
+				placeholder="Кратко опишите предмет обращения"
+			/>
+			<label for="login" class="popup__form-label">Ваш email</label>
+			<input
+				class="popup__form-input input"
+				type="email"
+				name="email"
+				placeholder="Введите email"
+			/>
+			<label for="login" class="popup__form-label">Ваш email</label>
+			<textarea
+				class="popup__form-input textarea"
+				name="password"
+				placeholder="Добавьте описание"
+			></textarea>
+			<div class="popup__form-buttons">
+				<button class="popup__form-submit button button--secondary" type="submit">Отправить</button>
+			</div>
+		</form>
+	</div>
+</div>

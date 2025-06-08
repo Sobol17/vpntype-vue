@@ -1,0 +1,81 @@
+/* style.css */
+.custom-select {
+	position: relative;
+
+	@include big-mobile {
+		width: 100%;
+	}
+}
+
+.select-header {
+	height: 44px;
+	width: 347px;
+	background: $background;
+	border-radius: 8px;
+	padding: 12px 16px;
+	cursor: pointer;
+	border: 1px solid $grey;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-size: 16px;
+	color: $dark-grey;
+	transition: all 0.3s ease;
+
+	@include desktop {
+		width: 240px;
+	}
+
+	@include big-mobile {
+		width: 100%;
+	}
+
+	&:hover {
+		background-color: $white;
+		border-color: $primary;
+
+		.select-header__icon {
+			color: $primary;
+		}
+	}
+
+	&__flex {
+		display: flex;
+		column-gap: 4px;
+		align-items: center;
+	}
+}
+
+.select-header.opened {
+	&.opened {
+		border: 1px solid #6f9eff;
+	}
+}
+
+.select-dropdown {
+	background: white;
+	box-shadow: 0px 2px 4px 0px rgba(207, 207, 207, 0.4);
+	border-radius: 12px;
+	margin-top: 4px;
+	padding: 14px;
+	position: absolute;
+	width: 100%;
+	z-index: 10;
+}
+
+.select-option {
+	padding: 12px 14px;
+	border-radius: 6px;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	cursor: pointer;
+
+	&:hover {
+		background: #e6eaf3;
+	}
+
+	&__icon {
+		margin-left: auto;
+	}
+}

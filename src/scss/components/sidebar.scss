@@ -1,0 +1,108 @@
+.sidebar {
+	@include tablet {
+		visibility: hidden;
+		opacity: 0;
+		position: fixed;
+		transition: all 0.5s ease;
+		inset: 0;
+		z-index: 10;
+		background: rgba(44, 44, 53, 0.1);
+		backdrop-filter: blur(2px);
+	}
+
+	&__flex {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+
+		@include big-mobile {
+			margin-top: 20px;
+		}
+	}
+
+	&.side-show {
+		visibility: visible;
+		opacity: 1;
+	}
+
+	&__inner {
+		width: 356px;
+		height: 100vh;
+		display: flex;
+		flex-direction: column;
+		background-color: $white;
+		border-radius: 0px 34px 34px 0px;
+		box-shadow: 0px 2px 4px 0px rgba(207, 207, 207, 0.4);
+		padding: 40px;
+
+		@include big-mobile {
+			width: 304px;
+			padding: 20px;
+		}
+	}
+
+	&__logo {
+		display: flex;
+		column-gap: 10px;
+		align-items: center;
+
+		@include big-mobile {
+			width: 120px;
+		}
+
+		&__txt {
+			font-size: 18px;
+			font-weight: 500;
+
+			@include big-mobile {
+				font-size: 14px;
+			}
+		}
+	}
+
+	&__items {
+		margin-top: 40px;
+		display: flex;
+		flex-direction: column;
+		row-gap: 6px;
+	}
+
+	&__item {
+		display: flex;
+		column-gap: 10px;
+		align-items: center;
+		color: $black;
+		border-radius: 12px;
+		padding: 15px 20px;
+
+		&:hover {
+			background-color: $secondary;
+		}
+
+		&.active {
+			background-color: $primary;
+			color: $white;
+		}
+	}
+
+	&__back {
+		margin-top: auto;
+		padding: 15px 20px;
+		display: flex;
+		align-items: center;
+		column-gap: 10px;
+		border-radius: 12px;
+
+		&:hover {
+			background-color: $secondary;
+		}
+	}
+
+	&__lang {
+		display: none;
+
+		@include big-mobile {
+			display: flex;
+		}
+	}
+}

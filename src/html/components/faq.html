@@ -1,0 +1,13 @@
+<div class="faq-wrapper">
+	<div class="faq">
+		<custom-accordion
+			v-for="item in faqItems"
+			:question="item.question"
+			:answer="item.answer"
+		></custom-accordion>
+	</div>
+	<img class="faq-bg" src="./assets/images/faq-question.svg" alt="faq-questions" />
+</div>
+<button @click="scrollToTop" class="faq__arrow-up">
+	<img src="./assets/icons/icon_arrow-up.svg" alt="" />
+</button>

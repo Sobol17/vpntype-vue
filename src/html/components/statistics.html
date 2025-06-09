@@ -1,10 +1,14 @@
 <div class="statistics">
 	<h2 class='mobile-title subtitle-24'>Статистика</h2>
-	<div class="statistics-date-picker text-link">
-		<img src="./assets/icons/icon_calendar.svg" alt="" />
-		<span>Выбрать временной диапазон</span>
-		<img src="./assets/icons/icon_arrow_down.svg" alt="" />
+	<div class="date-picker__wrapper">
+		<div @click='showDatePicker' ref='date-picker' class="statistics-date-picker text-link">
+			<img src="./assets/icons/icon_calendar.svg" alt="" />
+			<span>{{chosenDate ? formatDateRange(chosenDate?.start, chosenDate?.end, 'en-EN') : 'Выбрать временной диапазон'}}</span>
+			<img src="./assets/icons/icon_arrow_down.svg" alt="" />
+		</div>
+		<date-picker v-if="isDatePickerVisible" v-model="chosenDate" :range="true" locale="en-US"></date-picker>
 	</div>
+
 	<h2 class="statistics__header header-h4">Данные за: Февраль 2024</h2>
 	<div class="statistics__items">
 		<div class="statistics__item">

@@ -3,11 +3,11 @@ export function useLocale(Vue, i18n) {
 
 	const savedLocale = ref(localStorage.getItem('locale') || 'ru')
 
-	i18n.global.locale.value = savedLocale.value
+	i18n.global.locale = savedLocale.value
 
 	const changeLocale = newLocale => {
 		savedLocale.value = newLocale
-		i18n.global.locale.value = newLocale
+		i18n.global.locale = newLocale
 		localStorage.setItem('locale', newLocale)
 	}
 

@@ -1,8 +1,10 @@
 import { AccordionComponent } from './components/accordionComponent'
+import { DatePicker } from './components/datePicker'
 import { SelectComponent } from './components/selectComponent'
 import { useAddPayment } from './components/useAddPayment'
 import { useBurger } from './components/useBurger'
 import { useChangePayment } from './components/useChangePayment'
+import { useClickOutside } from './components/useClickOutside'
 import { useDropdown } from './components/useDropdown'
 import { useEmailPopup } from './components/useEmailPopup'
 import { useFaq } from './components/useFaq'
@@ -11,15 +13,16 @@ import { useMenu } from './components/useMenu'
 import { usePayment } from './components/usePayment'
 import { usePopup } from './components/usePopup'
 import { useReviews } from './components/useReviews'
+import { useStatistics } from './components/useStatistics'
 import { localeMessages } from './locale'
 import '/scss/main.scss'
 
-const { createApp, ref } = Vue
+const { createApp, ref, useTemplateRef } = Vue
 
 const savedLocale = localStorage.getItem('locale') || 'ru'
 
 const i18n = VueI18n.createI18n({
-	legacy: false,
+	legacy: true,
 	locale: savedLocale,
 	fallbackLocale: 'ru',
 	messages: localeMessages,
@@ -29,6 +32,7 @@ createApp({
 	components: {
 		'custom-select': SelectComponent,
 		'custom-accordion': AccordionComponent,
+		'date-picker': DatePicker,
 	},
 
 	setup() {
@@ -42,6 +46,7 @@ createApp({
 		const addPayment = useAddPayment(Vue)
 		const faq = useFaq(Vue)
 		const reviews = useReviews(Vue)
+		const statistics = useStatistics(Vue)
 		const localeHook = useLocale(Vue, i18n)
 
 		const paymentMethodOptions = ref([
@@ -122,11 +127,28 @@ createApp({
 			i18n.global.locale = locale
 		}
 
+		const isDatePickerVisible = ref(false)
+
+		const datePickerRef = useTemplateRef('date-picker')
+
+		const showDatePicker = () => {
+			isDatePickerVisible.value = !isDatePickerVisible.value
+		}
+
+		const hideDatePicker = () => {
+			isDatePickerVisible.value = false
+		}
+
+		useClickOutside(Vue, datePickerRef, hideDatePicker)
+
 		return {
 			paymentMethodOptions,
 			paymentBanks,
 			faqItems,
 			setLocale,
+			showDatePicker,
+			datePickerRef,
+			isDatePickerVisible,
 			...dropdown,
 			...menu,
 			...burger,
@@ -138,6 +160,7 @@ createApp({
 			...localeHook,
 			...changePayment,
 			...addPayment,
+			...statistics,
 		}
 	},
 })

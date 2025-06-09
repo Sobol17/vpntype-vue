@@ -10,6 +10,11 @@ export default defineConfig({
 		port: 3000,
 	},
 	publicDir: './src/assets',
+	define: {
+		__VUE_I18N_FULL_INSTALL__: true,
+		__VUE_I18N_LEGACY_API__: true,
+		__INTLIFY_PROD_DEVTOOLS__: false,
+	},
 	build: {
 		outDir: '../dist',
 		emptyOutDir: true,
@@ -24,6 +29,7 @@ export default defineConfig({
 				rates: './src/rates.html',
 				settings: './src/settings.html',
 				support: './src/support.html',
+				statistics: './src/statistics.html',
 			},
 		},
 	},

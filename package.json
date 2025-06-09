@@ -1,7 +1,7 @@
 {
-	"name": "kds-stroy",
+	"name": "vpntype",
 	"private": true,
-	"version": "0.0.0",
+	"version": "1.0.0",
 	"type": "module",
 	"scripts": {
 		"dev": "vite",
@@ -21,6 +21,7 @@
 	"dependencies": {
 		"@fancyapps/ui": "^5.0.35",
 		"intl-tel-input": "^19.2.16",
-		"swiper": "^11.0.5"
+		"swiper": "^11.0.5",
+		"vue-i18n": "^9.14.4"
 	}
 }

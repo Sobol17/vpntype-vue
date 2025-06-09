@@ -10,6 +10,7 @@ import { useLocale } from './components/useLocale'
 import { useMenu } from './components/useMenu'
 import { usePayment } from './components/usePayment'
 import { usePopup } from './components/usePopup'
+import { useReviews } from './components/useReviews'
 import { localeMessages } from './locale'
 import '/scss/main.scss'
 
@@ -39,7 +40,8 @@ createApp({
 		const payment = usePayment(Vue)
 		const changePayment = useChangePayment(Vue)
 		const addPayment = useAddPayment(Vue)
-		const faq = useFaq()
+		const faq = useFaq(Vue)
+		const reviews = useReviews(Vue)
 		const localeHook = useLocale(Vue, i18n)
 
 		const paymentMethodOptions = ref([
@@ -114,21 +116,6 @@ createApp({
 				answer:
 					'Платите как вам удобно: зарубежной картой, картой из России, через SberPay, Tinkoff Pay или ЮMoney.',
 			},
-			{
-				question: 'Замедлит ли VPN мое интернет-соединение?',
-				answer:
-					'Платите как вам удобно: зарубежной картой, картой из России, через SberPay, Tinkoff Pay или ЮMoney.',
-			},
-			{
-				question: 'Замедлит ли VPN мое интернет-соединение?',
-				answer:
-					'Платите как вам удобно: зарубежной картой, картой из России, через SberPay, Tinkoff Pay или ЮMoney.',
-			},
-			{
-				question: 'Замедлит ли VPN мое интернет-соединение?',
-				answer:
-					'Платите как вам удобно: зарубежной картой, картой из России, через SberPay, Tinkoff Pay или ЮMoney.',
-			},
 		])
 
 		const setLocale = locale => {
@@ -145,6 +132,7 @@ createApp({
 			...burger,
 			...payment,
 			...faq,
+			...reviews,
 			...popup,
 			...emailPopup,
 			...localeHook,

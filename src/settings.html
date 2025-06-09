@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<load src="./html/base/head.html" title="Главная" />
+
+	<body class="body">
+		<div id="app">
+			<div class="container">
+				<load src="./html/components/sidebar.html" />
+				<main class="main">
+					<load src="./html/components/header.html" title="Статистика" />
+					<div class="content-container">
+						<load src="./html/components/statistics.html" />
+					</div>
+				</main>
+			</div>
+		</div>
+
+		<script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+		<script src="https://unpkg.com/vue-i18n@9/dist/vue-i18n.global.js"></script>
+		<script type="module" src="/js/main.js"></script>
+	</body>
+</html>

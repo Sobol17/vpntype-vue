@@ -638,3 +638,56 @@
 		}
 	}
 }
+
+.home-faq {
+	margin: 90px auto;
+
+	&__wrapper {
+		display: flex;
+		align-items: start;
+		column-gap: 20px;
+
+		@include big-mobile {
+			flex-direction: column;
+			align-items: center;
+			row-gap: 20px;
+		}
+
+		&__img {
+			flex-shrink: 1;
+
+			@include big-mobile {
+				display: none;
+			}
+
+			&--bottom {
+				align-self: flex-end;
+			}
+		}
+	}
+
+	&__items {
+		flex: 1 0 700px;
+		display: flex;
+		flex-direction: column;
+		row-gap: 20px;
+
+		@include big-mobile {
+			flex: 1 0 100%;
+			width: 100%;
+		}
+	}
+
+	&__more {
+		display: flex;
+		align-items: center;
+		column-gap: 4px;
+		color: $primary;
+		text-decoration-line: underline;
+		text-decoration-style: solid;
+		text-decoration-skip-ink: none;
+		text-decoration-thickness: auto;
+		text-underline-offset: auto;
+		text-underline-position: from-font;
+	}
+}

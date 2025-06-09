@@ -5,7 +5,7 @@ import { ViteMinifyPlugin } from 'vite-plugin-minify'
 
 export default defineConfig({
 	root: './src',
-	base: '/vpntype/',
+	base: './',
 	server: {
 		port: 3000,
 	},
@@ -16,12 +16,14 @@ export default defineConfig({
 		minify: false,
 		rollupOptions: {
 			input: {
-				main: './src/index.html',
-				register: './src/register.html',
+				index: './src/index.html',
 				account: './src/account.html',
-				news: './src/news.html',
-				singleNews: './src/single-news.html',
-				404: './src/404.html',
+				faq: './src/faq.html',
+				payments: './src/payments.html',
+				promo: './src/promo.html',
+				rates: './src/rates.html',
+				settings: './src/settings.html',
+				support: './src/support.html',
 			},
 		},
 	},

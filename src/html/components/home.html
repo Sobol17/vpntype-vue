@@ -327,7 +327,7 @@
 			</div>
 		</div>
 		<div class="advance__reviews">
-			<div v-for="i in 8" class="advance-review">
+			<div v-for="i in 8" :key="i" class="advance-review">
 				<div class="advance-review__head">
 					<div class="advance-review__user">
 						<img class="advance-review__user__avatar" src="./assets/images/avatar.png" alt="" />
@@ -364,8 +364,49 @@
 					</div>
 				</div>
 			</div>
+			<template v-if="isHiddenReviewsVisible">
+				<div v-for="i in 8" :key="i" class="advance-review">
+					<div class="advance-review__head">
+						<div class="advance-review__user">
+							<img class="advance-review__user__avatar" src="./assets/images/avatar.png" alt="" />
+							<span class="advance-review__user__email">akul...@gmail</span>
+						</div>
+						<div class="advance-review__badge">
+							<img src="./assets/icons/advance-tg.svg" alt="" />
+							<p class="advance-review__badge__text">
+								Posted on <br />
+								<span class="advance-review__badge__text--blue">Telegram</span>
+							</p>
+						</div>
+					</div>
+					<div class="advance-review__text">
+						Начала работать в качестве хобби, разместила ссылки в своем блоге и в соцсетях.
+						Оказалось, что это приносит реально приносит стабильный доход
+					</div>
+					<div class="advance-review__bottom">
+						<div class="advance-review__bottom__item">
+							<div class="advance-review__bottom__title">100 тыс.</div>
+							<div class="advance-review__bottom__text">всего инвайтов</div>
+						</div>
+						<div class="advance-review__bottom__item">
+							<div class="advance-review__bottom__title advance-review__bottom__title--blue">
+								100 тыс.
+							</div>
+							<div class="advance-review__bottom__text">общая награда</div>
+						</div>
+						<div class="advance-review__bottom__item">
+							<div class="advance-review__bottom__title advance-review__bottom__title--blue">
+								500 руб.
+							</div>
+							<div class="advance-review__bottom__text">в сред. за 1 юзера</div>
+						</div>
+					</div>
+				</div>
+			</template>
 		</div>
-		<div class="advance__btn">Показать больше отзывов (+4)</div>
+		<div v-if="!isHiddenReviewsVisible" @click="showMoreReviews" class="advance__btn">
+			Показать больше отзывов (+4)
+		</div>
 	</section>
 	<section class="main-container premium">
 		<img class="premium__pic" src="./assets/images/premium-pic.svg" alt="" />
@@ -393,6 +434,41 @@
 				</svg>
 				<span>Стать партнером</span>
 			</button>
+		</div>
+	</section>
+	<section class="main-container home-faq">
+		<h2 class="home-faq__title advance__title">Часто задаваемые вопросы</h2>
+		<div class="home-faq__wrapper">
+			<div class="home-faq__wrapper__img home-faq__wrapper__img--bottom">
+				<img src="./assets/images/faq-question.svg" alt="" />
+			</div>
+
+			<div class="home-faq__items">
+				<custom-accordion
+					v-for="item in faqItems"
+					:key="item.question"
+					:question="item.question"
+					:answer="item.answer"
+				></custom-accordion>
+			</div>
+
+			<div v-if="isHiddenItemsVisible" class="home-faq__items">
+				<custom-accordion
+					v-for="item in faqItems"
+					:key="item.question"
+					:question="item.question"
+					:answer="item.answer"
+				></custom-accordion>
+			</div>
+
+			<div v-if="!isHiddenItemsVisible" @click="showMore" class="home-faq__more">
+				<span>Показать больше</span>
+				<img src="./assets/icons/icon_arrow_down.svg" alt="" />
+			</div>
+
+			<div class="home-faq__wrapper__img">
+				<img class="home-faq__wrapper__img" src="./assets/images/faq-question.svg" alt="" />
+			</div>
 		</div>
 	</section>
 </div>

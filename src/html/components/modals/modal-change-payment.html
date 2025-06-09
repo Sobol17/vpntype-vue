@@ -1,0 +1,59 @@
+<div v-if="isChangePaymentPopupShow" class="popup" id="popup-auth">
+	<div v-if="!changeSuccess" class="popup__container popup__container--mini">
+		<button
+			@click="toggleChangePaymentPopup"
+			class="popup__close"
+			type="button"
+			aria-label="Закрыть окно"
+		>
+			<img src="./assets/icons/icon_close.svg" alt="" />
+		</button>
+		<img class="popup__img popup__img--mini" src="./assets/icons/change-payment.svg" alt="" />
+		<h2 class="popup__title">Изменение платежных данных</h2>
+
+		<form class="popup__form" id="formAuth">
+			<label for="login" class="popup__form-label">Платежный метод</label>
+			<custom-select
+				:options="paymentMethodOptions"
+				v-model="selectedValue"
+				@update:selected="getSelectedMethod($event)"
+			></custom-select>
+			<label for="login" class="popup__form-label">Введите новые данные</label>
+			<div class="input__wrapper" :class="{'success': isChangeFormValid}">
+				<input
+					v-model="changeInput"
+					class="input popup__form-input"
+					type="text"
+					name="login"
+					placeholder="Введите данные"
+				/>
+			</div>
+			<div class="popup__form-buttons">
+				<button
+					@click="changeSuccess = true"
+					:disabled="!isChangeFormValid"
+					class="popup__form-submit button"
+					type="submit"
+				>
+					Изменить платежные данные
+				</button>
+			</div>
+		</form>
+	</div>
+	<div v-else class="popup__container popup__container--mini popup__container--success">
+		<button
+			@click="toggleChangePaymentPopup"
+			class="popup__close"
+			type="button"
+			aria-label="Закрыть окно"
+		>
+			<img src="./assets/icons/icon_close.svg" alt="" />
+		</button>
+		<img class="popup__img popup__img--mini" src="./assets/icons/icon_popup_success.svg" alt="" />
+		<h2 class="popup__title">Платежные данные изменены</h2>
+		<p class="popup__text">
+			Теперь вы можете автоматически использовать эти данные при выводе вознаграждения
+		</p>
+		<button @click="toggleChangePaymentPopup" class="button popup__success-btn">Понятно</button>
+	</div>
+</div>

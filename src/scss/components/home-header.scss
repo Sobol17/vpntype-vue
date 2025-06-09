@@ -1,0 +1,46 @@
+.home-header {
+	background-color: $background;
+	padding: 40px 0px;
+
+	&__inner {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	&__right {
+		display: flex;
+		align-items: center;
+		column-gap: 20px;
+		@include tablet {
+			display: none;
+		}
+	}
+
+	&__button {
+		display: flex;
+		align-items: center;
+		column-gap: 10px;
+		font-size: 16px;
+	}
+
+	&__nav {
+		@include tablet {
+			display: none;
+		}
+		&__list {
+			display: flex;
+			column-gap: 32px;
+			align-items: center;
+		}
+
+		&__link {
+			display: flex;
+			column-gap: 4px;
+			align-items: center;
+			font-size: 16px;
+			font-weight: 500;
+			line-height: 1.2;
+		}
+	}
+}

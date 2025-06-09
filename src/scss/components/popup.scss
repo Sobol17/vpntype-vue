@@ -10,6 +10,10 @@
 	backdrop-filter: blur(10px);
 	overflow: auto;
 
+	&__loader {
+		margin-top: 45px;
+	}
+
 	&__container {
 		margin: 70px 0px;
 		border-radius: 34px;
@@ -21,6 +25,15 @@
 		flex-direction: column;
 		align-items: center;
 
+		&--success {
+			padding: 100px 50px !important;
+		}
+
+		&--mini {
+			padding: 50px;
+			width: 583px;
+		}
+
 		@include tablet {
 			width: 100%;
 			margin: 50px 20px;
@@ -31,6 +44,11 @@
 	&__img {
 		width: 170px;
 		height: 170px;
+
+		&--mini {
+			height: 50px;
+			width: 50px;
+		}
 	}
 
 	&__close {
@@ -48,18 +66,44 @@
 		font-size: 24px;
 		font-weight: 700;
 		line-height: 1.2;
+
+		@include big-mobile {
+			text-align: center;
+			margin-top: 10px;
+		}
 	}
 
 	&__text {
 		margin-top: 10px;
-		font-size: 16px;
+		font-size: 14px;
 		font-weight: 500;
 		line-height: 1.4;
+		text-align: center;
+
+		&--green {
+			color: $green;
+		}
+
+		a {
+			color: $primary;
+		}
+	}
+
+	&__success-btn {
+		margin-top: 32px;
 	}
 
 	&__form {
 		width: 100%;
 		margin-top: 32px;
+
+		.select-header {
+			width: 100% !important;
+		}
+
+		@include big-mobile {
+			margin-top: 14px;
+		}
 
 		&-label {
 			display: block;
@@ -70,6 +114,51 @@
 
 		&-submit {
 			margin-top: 24px;
+
+			&--second {
+				margin-top: 14px;
+			}
 		}
+
+		&-note {
+			margin-top: 70px;
+			color: $dark-grey;
+			font-size: 16px;
+			font-weight: 400;
+			line-height: 1.2;
+
+			@include big-mobile {
+				font-size: 14px;
+				text-align: center;
+				margin-top: 50px;
+			}
+
+			a {
+				display: inline-block;
+				font-weight: 500;
+				color: $primary;
+				border-bottom: 1px solid $primary;
+			}
+		}
+	}
+}
+
+.loader {
+	width: 40px;
+	height: 40px;
+	border: 3px solid #8d9ed94d;
+	border-bottom-color: $primary;
+	border-radius: 50%;
+	display: inline-block;
+	box-sizing: border-box;
+	animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
 	}
 }

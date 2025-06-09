@@ -1,0 +1,67 @@
+<div v-if="isEmailPopupShow" class="popup" id="popup-auth">
+	<div v-if="!formSuccess" class="popup__container popup__container--mini">
+		<button @click="toggleEmailPopup" class="popup__close" type="button" aria-label="Закрыть окно">
+			<img src="./assets/icons/icon_close.svg" alt="" />
+		</button>
+		<img class="popup__img popup__img--mini" src="./assets/icons/email-popup.svg" alt="" />
+		<h2 class="popup__title">
+			{{ formPending ? 'Подтвердите электронный адрес' : 'Изменение email'}}
+		</h2>
+		<p v-if="!formPending" class="popup__text">
+			Мы отправим вам на новую почту ссылку для подтверждения, после подтверждения вы получите
+			доступ к личному кабинету. Не забудьте проверить папку спам.
+		</p>
+		<p v-else class="popup__text">
+			Мы отправили на указанную вами почту (<a href="./">nastyapolzazaza@gmal.com</a>) ссылку для
+			подтверждения, после подтверждения вы получите доступ к личному кабинету. Не забудьте
+			проверить папку спам.
+		</p>
+		<form v-if="!formPending" class="popup__form" id="formAuth">
+			<label for="login" class="popup__form-label">Введите ваш текущий email</label>
+
+			<div class="input__wrapper" :class="{'success': isEmailFormValid}">
+				<input
+					v-model="oldEmail"
+					class="input popup__form-input"
+					type="email"
+					name="login"
+					placeholder="Введите email"
+				/>
+			</div>
+			<label for="login" class="popup__form-label">Введите ваш новый email</label>
+			<div class="input__wrapper" :class="{'success': isEmailFormValid}">
+				<input
+					v-model="newEmail"
+					class="popup__form-input input"
+					type="email"
+					name="email"
+					placeholder="Введите email"
+				/>
+			</div>
+			<div class="popup__form-buttons">
+				<button :disabled="!isEmailFormValid" class="popup__form-submit button" type="submit">
+					Изменить email
+				</button>
+			</div>
+
+			<div class="popup__form-note">
+				Нет доступа к старой почте? <a href="./support">Обратитесь в нашу тех. поддержку</a>
+			</div>
+		</form>
+		<div class="popup__loader" v-else>
+			<span class="loader"></span>
+		</div>
+	</div>
+	<div v-else class="popup__container popup__container--mini popup__container--success">
+		<button @click="toggleEmailPopup" class="popup__close" type="button" aria-label="Закрыть окно">
+			<img src="./assets/icons/icon_close.svg" alt="" />
+		</button>
+		<img class="popup__img popup__img--mini" src="./assets/icons/icon_popup_success.svg" alt="" />
+		<h2 class="popup__title">Email успешно изменен</h2>
+		<p class="popup__text">
+			<span class="popup__text--green">Почта успешно подтверждена.</span> Теперь вы сможете получить
+			доступ к личному кабинету используя новый email - <a href="./">newemail@gmail.com</a>
+		</p>
+		<button class="button popup__success-btn">Войти</button>
+	</div>
+</div>

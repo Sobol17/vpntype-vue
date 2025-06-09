@@ -1,0 +1,48 @@
+<div v-if="isAddPaymentPopupShow" class="popup" id="popup-auth">
+	<div class="popup__container popup__container--mini">
+		<button
+			@click="toggleAddPaymentPopup"
+			class="popup__close"
+			type="button"
+			aria-label="Закрыть окно"
+		>
+			<img src="./assets/icons/icon_close.svg" alt="" />
+		</button>
+		<img class="popup__img popup__img--mini" src="./assets/icons/change-payment.svg" alt="" />
+		<h2 class="popup__title">Добавление платежного метода</h2>
+
+		<form class="popup__form" id="formAuth">
+			<label for="login" class="popup__form-label">Платежный метод</label>
+			<custom-select
+				:options="paymentMethodOptions"
+				v-model="selectedAddValue"
+				@update:selected="getSelectedMethod($event)"
+			></custom-select>
+			<div v-if="selectedAddValue !== null">
+				<label for="login" class="popup__form-label"
+					>{{selectedAddValue?.value === "crypto" ? 'Введите новые данные крипто-кошелька' :
+					'Введите новые данные карты'}}</label
+				>
+				<div class="input__wrapper" :class="{'success': isAddFormValid}">
+					<input
+						v-model="addInput"
+						class="input popup__form-input"
+						type="text"
+						name="login"
+						placeholder="Введите данные"
+					/>
+				</div>
+			</div>
+			<div class="popup__form-buttons">
+				<button
+					@click="addSuccess = true"
+					:disabled="!isAddFormValid"
+					class="popup__form-submit button"
+					type="submit"
+				>
+					Сохранить
+				</button>
+			</div>
+		</form>
+	</div>
+</div>

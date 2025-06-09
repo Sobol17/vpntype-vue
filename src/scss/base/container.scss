@@ -17,9 +17,20 @@
 .content-container {
 	max-width: 1231px;
 	padding-right: 20px;
+	margin-bottom: 60px;
 	width: 100%;
 
 	@include tablet {
+		padding: 0px 16px;
+	}
+}
+
+.main-container {
+	max-width: 1171px;
+	width: 100%;
+	margin: 0 auto;
+
+	@include small-desktop {
 		padding: 0px 16px;
 	}
 }

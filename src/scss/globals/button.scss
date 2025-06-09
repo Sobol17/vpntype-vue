@@ -28,7 +28,7 @@
 
 	&:disabled {
 		background-color: $grey;
-		color: $white;
+		color: #b6b8bd99;
 		cursor: not-allowed;
 	}
 
@@ -41,5 +41,9 @@
 		column-gap: 4px;
 		align-items: center;
 		color: $primary;
+	}
+
+	&--text-16 {
+		font-size: 16px;
 	}
 }

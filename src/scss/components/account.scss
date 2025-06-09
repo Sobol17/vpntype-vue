@@ -47,6 +47,14 @@
 	align-items: center;
 	column-gap: 20px;
 
+	&--delete {
+		cursor: pointer;
+		transition: background-color 0.3s ease;
+		&:hover {
+			background-color: #e6eaf3;
+		}
+	}
+
 	&__mobile-content {
 		display: none;
 
@@ -110,6 +118,16 @@
 		align-items: center;
 		column-gap: 20px;
 	}
+
+	&__icon {
+		color: $grey-middle;
+		&:hover {
+			color: #5c75c999;
+		}
+		&:active {
+			color: $primary;
+		}
+	}
 }
 
 .account-payment {
@@ -137,6 +155,9 @@
 
 	&__btn {
 		margin-top: 36px;
+		@include big-mobile {
+			margin-bottom: 60px;
+		}
 	}
 }
 

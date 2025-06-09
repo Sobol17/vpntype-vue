@@ -1,9 +1,13 @@
 import { AccordionComponent } from './components/accordionComponent'
 import { SelectComponent } from './components/selectComponent'
+import { useAddPayment } from './components/useAddPayment'
 import { useBurger } from './components/useBurger'
+import { useChangePayment } from './components/useChangePayment'
 import { useDropdown } from './components/useDropdown'
+import { useEmailPopup } from './components/useEmailPopup'
 import { useFaq } from './components/useFaq'
 import { useLocale } from './components/useLocale'
+import { useMenu } from './components/useMenu'
 import { usePayment } from './components/usePayment'
 import { usePopup } from './components/usePopup'
 import { localeMessages } from './locale'
@@ -29,8 +33,12 @@ createApp({
 	setup() {
 		const dropdown = useDropdown(Vue)
 		const burger = useBurger(Vue)
+		const menu = useMenu(Vue)
 		const popup = usePopup(Vue)
+		const emailPopup = useEmailPopup(Vue)
 		const payment = usePayment(Vue)
+		const changePayment = useChangePayment(Vue)
+		const addPayment = useAddPayment(Vue)
 		const faq = useFaq()
 		const localeHook = useLocale(Vue, i18n)
 
@@ -133,11 +141,15 @@ createApp({
 			faqItems,
 			setLocale,
 			...dropdown,
+			...menu,
 			...burger,
 			...payment,
 			...faq,
 			...popup,
+			...emailPopup,
 			...localeHook,
+			...changePayment,
+			...addPayment,
 		}
 	},
 })

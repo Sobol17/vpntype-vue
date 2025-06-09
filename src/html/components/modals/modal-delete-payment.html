@@ -1,0 +1,30 @@
+<div v-if="isDeletePaymentPopupShow" class="popup" id="popup-auth">
+	<div class="popup__container popup__container--mini">
+		<button
+			@click="toggleDeletePaymentPopup"
+			class="popup__close"
+			type="button"
+			aria-label="Закрыть окно"
+		>
+			<img src="./assets/icons/icon_close.svg" alt="" />
+		</button>
+		<img class="popup__img" src="./assets/images/popup_delete_pic.svg" alt="" />
+		<h2 class="popup__title">Вы уверены, что хотите удалить метод?</h2>
+		<p class="popup__text">
+			Если вы удалите платежную информацию, вам станет недоступна возможность автоматического выбора
+			при выводе вознаграждения
+		</p>
+		<div class="popup__form-buttons">
+			<button class="popup__form-submit button button--secondary button--text-16" type="submit">
+				Да, удалить метод
+			</button>
+			<button
+				@click="toggleDeletePaymentPopup"
+				class="popup__form-submit--second button button button--text-16"
+				type="submit"
+			>
+				Нет, вернуться назад
+			</button>
+		</div>
+	</div>
+</div>

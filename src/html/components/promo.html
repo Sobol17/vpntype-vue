@@ -14,6 +14,11 @@
 			<img src="./assets/images/illustration.svg" alt="" />
 		</div>
 	</div>
+	<div class="promo-personal__toast" v-if="isCopied">
+		<img src="./assets/icons/icon_check.svg" alt="" />
+		<span>Скопировано</span>
+	</div>
+
 	<div class="promo-personal">
 		<h4 class="promo-personal__title header-h4">Ссылка для общего доступа</h4>
 		<p class="promo-personal__text hint-medium">
@@ -28,7 +33,12 @@
 					placeholder="Ссылка"
 					value="https://assetsb5b18553a630af/klervf/342"
 				/>
-				<button class="button promo-personal__button">Копировать</button>
+				<button
+					@click="copy('https://assetsb5b18553a630af/klervf/342')"
+					class="button promo-personal__button"
+				>
+					<span>Копировать</span>
+				</button>
 			</div>
 			<div class="promo-personal__social">
 				<a href="/" class="promo-personal__social__link">
@@ -136,7 +146,9 @@
 		<div class="promo-personal__wrapper">
 			<div class="promo-personal__flex">
 				<input class="input promo-personal__input" type="text" placeholder="code" value="RKGFG35" />
-				<button class="button promo-personal__button">Копировать</button>
+				<button @click="copy('RKGFG35')" class="button promo-personal__button">
+					<span>Копировать</span>
+				</button>
 			</div>
 		</div>
 	</div>

@@ -29,7 +29,11 @@ export const DatePicker = {
       <div class="date-picker__header">
 				<div class="date-picker__header__text" @click="toggleDropdown">
 					<span>{{ currentMonth }} {{ currentYear }}</span>
-					<img src="./assets/icons/icon_arrow_down.svg" alt="" />
+					
+					<svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path d="M15 7.32432L9.5 13L4 7.32432L5.28333 6L9.5 10.3514L13.7167 6L15 7.32432Z" fill="#5C75C9"/>
+					</svg>
+
 					<transition name="dropdown">
 						<div v-if="isDropdownVisible" class="date-picker__dropdown">
 							<div
@@ -40,7 +44,10 @@ export const DatePicker = {
 								@click="selectYear(year)"
 							>
 								{{ year }}
-								 <img v-if="year === currentYear" src="./assets/icons/icon_date_check.svg" alt="" />
+								<svg v-if="year === currentYear"  width="14" height="12" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path d="M4.8426 11.3391C4.76947 11.3391 4.696 11.3114 4.6401 11.2555L0.0838477 6.69922C-0.0279492 6.58742 -0.0279492 6.40637 0.0838477 6.29457L1.81881 4.55961C1.93061 4.44781 2.11166 4.44781 2.22346 4.55961L4.78565 7.1218C4.81693 7.15309 4.86791 7.15309 4.89955 7.1218L11.2765 0.744805C11.3303 0.691016 11.4031 0.661133 11.479 0.661133C11.555 0.661133 11.6278 0.691367 11.6815 0.744805L13.4165 2.47977C13.5283 2.59156 13.5283 2.77262 13.4165 2.88441L5.0451 11.2555C4.9892 11.3114 4.91572 11.3391 4.8426 11.3391Z" fill="#5C75C9"/>
+								</svg>
+
 							</div>
 						</div>
 					</transition>

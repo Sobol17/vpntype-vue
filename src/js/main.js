@@ -4,7 +4,8 @@ import { SelectComponent } from './components/selectComponent'
 import { useAddPayment } from './components/useAddPayment'
 import { useBurger } from './components/useBurger'
 import { useChangePayment } from './components/useChangePayment'
-import { useClickOutside } from './components/useClickOutside'
+import { useCopyToClipBoard } from './components/useCopy'
+import { useDatePicker } from './components/useDatePIcker'
 import { useDropdown } from './components/useDropdown'
 import { useEmailPopup } from './components/useEmailPopup'
 import { useFaq } from './components/useFaq'
@@ -14,6 +15,7 @@ import { usePayment } from './components/usePayment'
 import { usePopup } from './components/usePopup'
 import { useReviews } from './components/useReviews'
 import { useStatistics } from './components/useStatistics'
+import { useInitData } from './data'
 import { localeMessages } from './locale'
 import '/scss/main.scss'
 
@@ -48,107 +50,17 @@ createApp({
 		const reviews = useReviews(Vue)
 		const statistics = useStatistics(Vue)
 		const localeHook = useLocale(Vue, i18n)
-
-		const paymentMethodOptions = ref([
-			{
-				value: 'crypto',
-				label: 'Крипто-кошелек',
-				icon: './assets/icons/crypto.svg',
-			},
-			{
-				value: 'card',
-				label: 'Банковская карта',
-				icon: './assets/icons/card.svg',
-			},
-			{
-				value: 'sbp',
-				label: 'СБП',
-				icon: './assets/icons/sbp.svg',
-			},
-			{
-				value: 'umoney',
-				label: 'Юmoney',
-				icon: './assets/icons/umoney.svg',
-			},
-		])
-
-		const paymentBanks = ref([
-			{
-				value: 't-bank',
-				label: 'Т-банк',
-				icon: './assets/icons/t-bank.svg',
-			},
-			{
-				value: 'rosselhoz',
-				label: 'Россельхоз',
-				icon: './assets/icons/rosselhoz.svg',
-			},
-			{
-				value: 'sber',
-				label: 'СБЕР',
-				icon: './assets/icons/sber.svg',
-			},
-			{
-				value: 'rosselhoz',
-				label: 'Россельхоз',
-				icon: './assets/icons/t-bank.svg',
-			},
-		])
-
-		const faqItems = ref([
-			{
-				question: 'Какие варианты оплаты у нас есть?',
-				answer:
-					'Платите как вам удобно: зарубежной картой, картой из России, через SberPay, Tinkoff Pay или ЮMoney.',
-			},
-			{
-				question: 'Как мне использовать промокод?',
-				answer:
-					'Платите как вам удобно: зарубежной картой, картой из России, через SberPay, Tinkoff Pay или ЮMoney.',
-			},
-			{
-				question: 'Как часто нужно оплачивать подписку VPNTYPE?',
-				answer:
-					'Платите как вам удобно: зарубежной картой, картой из России, через SberPay, Tinkoff Pay или ЮMoney.',
-			},
-			{
-				question: 'Как мне отменить подписку?',
-				answer:
-					'Платите как вам удобно: зарубежной картой, картой из России, через SberPay, Tinkoff Pay или ЮMoney.',
-			},
-			{
-				question: 'Замедлит ли VPN мое интернет-соединение?',
-				answer:
-					'Платите как вам удобно: зарубежной картой, картой из России, через SberPay, Tinkoff Pay или ЮMoney.',
-			},
-		])
+		const initData = useInitData()
+		const copyClipBoard = useCopyToClipBoard(Vue)
 
 		const setLocale = locale => {
 			i18n.global.locale = locale
 		}
 
-		const isDatePickerVisible = ref(false)
-
-		const datePickerRef = useTemplateRef('date-picker')
-
-		const showDatePicker = () => {
-			isDatePickerVisible.value = !isDatePickerVisible.value
-		}
-
-		const hideDatePicker = () => {
-			isDatePickerVisible.value = false
-		}
-
-		useClickOutside(Vue, datePickerRef, hideDatePicker)
+		const datePicker = useDatePicker(Vue)
 
 		return {
-			paymentMethodOptions,
-			paymentBanks,
-			faqItems,
 			setLocale,
-			showDatePicker,
-			datePickerRef,
-			isDatePickerVisible,
 			...dropdown,
 			...menu,
 			...burger,
@@ -161,6 +73,9 @@ createApp({
 			...changePayment,
 			...addPayment,
 			...statistics,
+			...datePicker,
+			...initData,
+			...copyClipBoard,
 		}
 	},
 })

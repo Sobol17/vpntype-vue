@@ -3,8 +3,9 @@
 		<div class="main-container banner__wrapper">
 			<div class="banner__content">
 				<div class="banner__ratings">
-					<img src="./assets/images/rating_t-bank_1.svg" alt="" />
 					<img src="./assets/images/rating_tg_1.svg" alt="" />
+
+					<img src="./assets/images/rating_t-bank_1.svg" alt="" />
 				</div>
 				<h1 class="banner__title">
 					Зарабатывай вместе <br />
@@ -364,15 +365,15 @@
 					</div>
 				</div>
 			</div>
-			<template v-if="isHiddenReviewsVisible">
+			<div class="advance__reviews__hide" v-if="isHiddenReviewsVisible">
 				<div v-for="i in 8" :key="i" class="advance-review">
 					<div class="advance-review__head">
 						<div class="advance-review__user">
-							<img class="advance-review__user__avatar" src="./assets/images/avatar.png" alt="" />
+							<img class="advance-review__user__avatar" src="/assets/images/avatar.png" alt="" />
 							<span class="advance-review__user__email">akul...@gmail</span>
 						</div>
 						<div class="advance-review__badge">
-							<img src="./assets/icons/advance-tg.svg" alt="" />
+							<img src="/assets/icons/advance-tg.svg" alt="" />
 							<p class="advance-review__badge__text">
 								Posted on <br />
 								<span class="advance-review__badge__text--blue">Telegram</span>
@@ -402,7 +403,7 @@
 						</div>
 					</div>
 				</div>
-			</template>
+			</div>
 		</div>
 		<div v-if="!isHiddenReviewsVisible" @click="showMoreReviews" class="advance__btn">
 			Показать больше отзывов (+4)

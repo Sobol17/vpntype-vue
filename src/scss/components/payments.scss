@@ -164,6 +164,10 @@
 			max-width: 240px;
 		}
 
+		@include small-desktop {
+			max-width: 100%;
+		}
+
 		@include big-mobile {
 			max-width: 100%;
 		}

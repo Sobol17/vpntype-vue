@@ -30,6 +30,8 @@ export default defineConfig({
 				settings: './src/settings.html',
 				support: './src/support.html',
 				statistics: './src/statistics.html',
+				blog: './src/blog.html',
+				article: './src/article.html',
 			},
 		},
 	},

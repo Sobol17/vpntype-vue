@@ -113,3 +113,50 @@ button {
 	opacity: 1;
 	overflow: hidden;
 }
+
+.breadcrumbs {
+	margin: 40px auto;
+	display: flex;
+	align-items: center;
+	column-gap: 14px;
+
+	li {
+		display: flex;
+		align-items: center;
+		column-gap: 14px;
+		&:not(&:last-child) {
+			&::after {
+				content: '';
+				display: block;
+				background: url('/assets/icons/breadcrumb-arrow.svg') center / cover no-repeat;
+				width: 4px;
+				height: 7px;
+			}
+		}
+	}
+
+	&__link {
+		font-size: 14px;
+		line-height: 1.3;
+		color: #474751;
+
+		&--active {
+			color: $primary;
+		}
+	}
+}
+
+.swiper-pagination {
+	position: unset;
+	margin-top: 8px;
+}
+
+.swiper-pagination-bullet {
+	width: 7px;
+	height: 7px;
+	background-color: #ced1d7;
+}
+
+.swiper-pagination-bullet-active {
+	background-color: $primary;
+}

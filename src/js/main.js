@@ -1,5 +1,6 @@
 import { AccordionComponent } from './components/accordionComponent'
 import { DatePicker } from './components/datePicker'
+import { FooterDropdown } from './components/footerDropdown'
 import { SelectComponent } from './components/selectComponent'
 import { useAddPayment } from './components/useAddPayment'
 import { useBurger } from './components/useBurger'
@@ -17,6 +18,7 @@ import { useReviews } from './components/useReviews'
 import { useStatistics } from './components/useStatistics'
 import { useInitData } from './data'
 import { localeMessages } from './locale'
+import { useSwiper } from './slider'
 import '/scss/main.scss'
 
 const { createApp, ref, useTemplateRef } = Vue
@@ -35,6 +37,7 @@ createApp({
 		'custom-select': SelectComponent,
 		'custom-accordion': AccordionComponent,
 		'date-picker': DatePicker,
+		'footer-dropdown': FooterDropdown,
 	},
 
 	setup() {
@@ -52,6 +55,7 @@ createApp({
 		const localeHook = useLocale(Vue, i18n)
 		const initData = useInitData()
 		const copyClipBoard = useCopyToClipBoard(Vue)
+		const sliders = useSwiper(Vue)
 
 		const setLocale = locale => {
 			i18n.global.locale = locale
@@ -76,6 +80,7 @@ createApp({
 			...datePicker,
 			...initData,
 			...copyClipBoard,
+			...sliders,
 		}
 	},
 })

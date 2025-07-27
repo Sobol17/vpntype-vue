@@ -28,6 +28,12 @@
 		display: flex;
 		align-items: center;
 		column-gap: 17px;
+
+		@include small-mobile {
+			img {
+				width: 100%;
+			}
+		}
 	}
 
 	&__title {
@@ -322,7 +328,7 @@
 
 .join {
 	padding: 90px 0px;
-	background: url('./assets/images/join-bg.png') center / cover no-repeat;
+	background: url('/assets/images/join-bg.png') center / cover no-repeat;
 
 	@include big-mobile {
 		padding: 40px 0px 0px 0px;
@@ -449,6 +455,10 @@
 		flex-wrap: wrap;
 		gap: 24px;
 		align-items: stretch;
+
+		&__hide {
+			display: contents;
+		}
 	}
 
 	&__btn {
@@ -667,6 +677,7 @@
 	}
 
 	&__items {
+		margin-top: 32px;
 		flex: 1 0 700px;
 		display: flex;
 		flex-direction: column;
@@ -679,7 +690,7 @@
 	}
 
 	&__more {
-		display: flex;
+		display: none;
 		align-items: center;
 		column-gap: 4px;
 		color: $primary;
@@ -689,5 +700,9 @@
 		text-decoration-thickness: auto;
 		text-underline-offset: auto;
 		text-underline-position: from-font;
+
+		@include big-mobile {
+			display: flex;
+		}
 	}
 }

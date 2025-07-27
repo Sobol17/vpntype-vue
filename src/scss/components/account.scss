@@ -39,6 +39,7 @@
 }
 
 .account-block {
+	max-height: 90px;
 	padding: 20px 40px 20px 16px;
 	border-radius: 12px;
 	background: $white;
@@ -90,6 +91,10 @@
 		font-weight: 600;
 		line-height: 1.2;
 
+		@include big-mobile {
+			font-size: 16px;
+		}
+
 		&--md {
 			font-size: 16px;
 			font-weight: 500;
@@ -110,6 +115,10 @@
 			font-weight: 500;
 			line-height: 1.4;
 			color: $dark-grey;
+
+			@include big-mobile {
+				font-size: 14px;
+			}
 		}
 	}
 
